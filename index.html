@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naji Doors | أبواب ناجي</title>
+    
+    <!-- Fonts: Playfair Display (Luxury Headings) & Inter (Modern Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for immediate usage) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Config for Naji Brand Colors -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        naji: {
+                            base: '#2C241B',   // Deep Espresso (Text/Headers)
+                            taupe: '#8C7B6C',  // Warm Taupe (Secondary)
+                            gold: '#C0A080',   // Muted Gold (Accents)
+                            bone: '#F9F8F6',   // Off-White (Background)
+                            sand: '#E8E6E1',   // Slightly darker background
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(44, 36, 27, 0.8), rgba(44, 36, 27, 0.6)), url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070&auto=format&fit=crop')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .door-card:hover .door-img {
+            transform: scale(1.05);
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* RTL Specifics */
+        [dir="rtl"] .font-serif {
+            font-family: 'Inter', sans-serif; /* Fallback for Arabic aesthetics if needed */
+        }
+        
+        /* Dropdown Positioning Fix for RTL */
+        [dir="rtl"] .group:hover .dropdown-menu {
+            left: 0;
+            right: auto;
+        }
+        [dir="ltr"] .group:hover .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
+    </style>
+</head>
+<body class="bg-naji-bone text-naji-base antialiased transition-colors duration-300">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-naji-bone/90 backdrop-blur-md border-b border-naji-taupe/20" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <img src="/assets/Naji-Logo.webp" alt="Naji Doors Logo" class="h-12 w-auto">
+                        <!-- Text Removed to rely on image logo or keep if preferred, keeping text for SEO but image is main visual -->
+                        <!-- <div class="flex flex-col">
+                            <span class="font-serif text-xl font-bold tracking-wider leading-none">NAJI</span>
+                            <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taupe">Doors</span>
+                        </div> -->
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+                    <a href="#about" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_about">ABOUT US</a>
+                    <a href="products.html" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_products">PRODUCTS</a>
+                    <a href="#collection" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_collection">COLLECTION</a>
+                    <a href="#features" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_features">WHY WPC?</a>
+                    <a href="#download" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_catalog">CATALOG</a>
+                    <a href="policy.html" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_policy">POLICY</a>
+                    <a href="#contact" class="bg-naji-base text-naji-bone px-6 py-2 rounded-full hover:bg-naji-taupe transition-colors text-sm font-medium" data-i18n="nav_contact">CONTACT</a>
+                    
+                    <!-- Language Toggle -->
+                    <button id="langToggle" class="flex items-center gap-2 text-xs font-bold border border-naji-base/20 px-3 py-1 rounded hover:bg-naji-base hover:text-white transition">
+                        <span id="currentLang">AR</span>
+                        <i data-lucide="globe" class="w-3 h-3"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-naji-base">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Panel -->
+        <div id="mobileMenu" class="hidden md:hidden bg-naji-bone border-t border-naji-taupe/20">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#about" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_about">About Us</a>
+                <a href="products.html" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_products">Products</a>
+                <a href="#collection" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_collection">Collection</a>
+                <a href="#features" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_features">Why WPC?</a>
+                <a href="#download" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_catalog">Catalog</a>
+                <a href="policy.html" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_policy">Policy</a>
+                <a href="#contact" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_contact">Contact</a>
+                
+                <!-- Mobile Language Toggle -->
+                <button id="mobileLangToggle" class="flex items-center gap-3 w-full text-left rtl:text-right px-3 py-3 text-naji-base font-medium hover:bg-naji-taupe/5 transition-colors border-t border-naji-taupe/10 mt-2">
+                    <i data-lucide="globe" class="w-5 h-5 text-naji-gold"></i>
+                    <span id="mobileLangLabel">العربية</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen flex items-center justify-center bg-hero-pattern bg-cover bg-center bg-fixed bg-no-repeat">
+        <div class="absolute inset-0 bg-black/30"></div> <!-- Overlay -->
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto fade-in-up">
+            <span class="text-naji-gold uppercase tracking-[0.3em] text-sm font-semibold mb-4 block" data-i18n="hero_subtitle">The Future of Entrances</span>
+            <h1 class="text-4xl md:text-7xl font-serif font-bold text-naji-bone mb-6 leading-tight" data-i18n="hero_title">
+                Elegant Durability.<br>Timeless Design.
+            </h1>
+            <p class="text-naji-bone/90 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto" data-i18n="hero_desc">
+                Discover the perfect balance of nature and technology with our premium WPC doors. Engineered for the Saudi climate, designed for luxury.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#collection" class="bg-naji-gold text-naji-base px-8 py-4 rounded-sm hover:bg-white transition duration-300 font-medium tracking-wide" data-i18n="btn_explore">
+                    Explore Collection
+                </a>
+                <a href="#contact" class="border border-naji-bone text-naji-bone px-8 py-4 rounded-sm hover:bg-naji-bone hover:text-naji-base transition duration-300 font-medium tracking-wide" data-i18n="btn_quote">
+                    Get a Quote
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-naji-bone/70"></i>
+        </div>
+    </header>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- 1. Intro Header -->
+            <div class="text-center mb-20 fade-in-up">
+                <span class="text-naji-gold uppercase tracking-widest text-xs font-semibold mb-3 block" data-i18n="about_label">Who We Are</span>
+                <h2 class="text-4xl md:text-5xl font-serif text-naji-base mb-6" data-i18n="about_title">About Naji Doors</h2>
+                <p class="text-naji-base/70 text-lg max-w-3xl mx-auto leading-relaxed" data-i18n="about_desc">
+                    Naji Doors offers integrated WPC doors that blend elegance, durability, and sustainability. We are committed to providing high-quality products designed to meet our customers' aspirations for beauty and strength.
+                </p>
+            </div>
+
+            <!-- 2. The Core Pillars -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                <!-- Vision Card -->
+                <div class="bg-naji-bone p-10 rounded-lg border-t-4 border-naji-gold text-center hover:shadow-lg transition duration-300 group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i data-lucide="eye" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-naji-base mb-4" data-i18n="vision_title">Our Vision</h3>
+                    <p class="text-naji-base/70 leading-relaxed text-sm" data-i18n="vision_desc">
+                        To be the leading choice for innovative WPC door solutions in the Saudi market, contributing to the development of the construction sector in line with Vision 2030.
+                    </p>
+                </div>
+
+                <!-- Mission Card -->
+                <div class="bg-naji-bone p-10 rounded-lg border-t-4 border-naji-taupe text-center hover:shadow-lg transition duration-300 group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i data-lucide="target" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-naji-base mb-4" data-i18n="mission_title">Our Mission</h3>
+                    <p class="text-naji-base/70 leading-relaxed text-sm" data-i18n="mission_desc">
+                        Manufacturing and supplying WPC doors that combine durability and beauty, meeting the needs of residential and commercial sectors using the latest technologies.
+                    </p>
+                </div>
+
+                <!-- Message Card -->
+                <div class="bg-naji-bone p-10 rounded-lg border-t-4 border-naji-base text-center hover:shadow-lg transition duration-300 group">
+                    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform">
+                        <i data-lucide="message-square-quote" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-naji-base mb-4" data-i18n="message_title">Our Message</h3>
+                    <p class="text-naji-base/70 leading-relaxed text-sm" data-i18n="message_desc">
+                        We are committed to providing innovative doors that meet client aspirations, balancing quality, design, and competitive pricing while building strong relationships.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 3. Centered Statistics Strip -->
+            <div class="bg-naji-base rounded-2xl p-12 text-naji-bone shadow-2xl relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/wood-pattern.png')]"></div>
+                
+                <div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x md:divide-x-reverse divide-naji-taupe/30">
+                    <div class="p-4">
+                        <span class="block text-5xl font-serif font-bold text-naji-gold mb-2">7</span>
+                        <span class="text-sm uppercase tracking-widest opacity-80" data-i18n="stat_years">Years Experience</span>
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-5xl font-serif font-bold text-naji-gold mb-2">140</span>
+                        <span class="text-sm uppercase tracking-widest opacity-80" data-i18n="stat_clients">Happy Clients</span>
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-5xl font-serif font-bold text-naji-gold mb-2">245</span>
+                        <span class="text-sm uppercase tracking-widest opacity-80" data-i18n="stat_projects">Projects Executed</span>
+                    </div>
+                    <div class="p-4">
+                        <span class="block text-5xl font-serif font-bold text-naji-gold mb-2">16</span>
+                        <span class="text-sm uppercase tracking-widest opacity-80" data-i18n="stat_cities">Cities Served</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-naji-bone/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl font-serif text-naji-base mb-4" data-i18n="services_title">Our Services / Products</h2>
+                <div class="w-16 h-1 bg-naji-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1: Interior Doors -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="door-open" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-naji-base mb-3" data-i18n="srv_1_title">Interior WPC Doors</h3>
+                    <p class="text-naji-base/70 text-sm leading-relaxed" data-i18n="srv_1_desc">
+                        We provide a wide range of modern designs and colors to suit all tastes and decor styles.
+                    </p>
+                </div>
+
+                <!-- Service 2: Professional Installation -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="wrench" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-naji-base mb-3" data-i18n="srv_2_title">Professional Supply & Installation</h3>
+                    <p class="text-naji-base/70 text-sm leading-relaxed" data-i18n="srv_2_desc">
+                        We provide supply and installation service by specialized technicians, with precision in measurement and speed in execution.
+                    </p>
+                </div>
+
+                <!-- Service 3: Project Solutions -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="hard-hat" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-naji-base mb-3" data-i18n="srv_3_title">Solutions for Projects</h3>
+                    <p class="text-naji-base/70 text-sm leading-relaxed" data-i18n="srv_3_desc">
+                        We serve contractors and residential and commercial projects with reliable door solutions that meet quality and quantity requirements.
+                    </p>
+                </div>
+
+                <!-- Service 4: Modern Designs -->
+                <div class="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow text-center group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="palette" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-naji-base mb-3" data-i18n="srv_4_title">Multiple Modern Designs</h3>
+                    <p class="text-naji-base/70 text-sm leading-relaxed" data-i18n="srv_4_desc">
+                        We offer a vast collection of modern designs and colors to match every taste and decor style.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Section (Highlights Only) -->
+    <section id="collection" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-4xl font-serif text-naji-base mb-2" data-i18n="collection_title">The Collection</h2>
+                    <p class="text-naji-taupe" data-i18n="collection_subtitle">Explore our K-Series Designs</p>
+                </div>
+            </div>
+
+            <!-- Gallery Grid (Highlights) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="galleryGrid">
+                <!-- Product 1 -->
+                <div class="door-card group cursor-pointer" data-category="modern">
+                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1517414909192-38d64478170c?q=80&w=1956&auto=format&fit=crop" alt="Door K-01" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
+                            <h3 class="text-2xl font-serif">Model K-01</h3>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 2 -->
+                 <div class="door-card group cursor-pointer" data-category="classic">
+                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1595846519845-68e298c2edd8?q=80&w=1974&auto=format&fit=crop" alt="Door K-02" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
+                            <h3 class="text-2xl font-serif">Model K-05</h3>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 3 -->
+                 <div class="door-card group cursor-pointer" data-category="modern">
+                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+                        <img src="https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?q=80&w=1996&auto=format&fit=crop" alt="Door K-03" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
+                            <h3 class="text-2xl font-serif">Model K-09</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <!-- UPDATED LINK -->
+                <a href="products.html" class="inline-flex items-center gap-2 text-naji-base border-b border-naji-gold pb-1 hover:text-naji-taupe transition-colors" data-i18n="view_full_catalog">
+                    Browse All Products <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section (Why WPC?) MOVED BELOW COLLECTION -->
+    <section id="features" class="py-24 bg-naji-bone">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-serif text-naji-base mb-4" data-i18n="features_title">Why Choose Naji WPC?</h2>
+                <div class="w-16 h-1 bg-naji-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <!-- Feature 1: Waterproof -->
+                <div class="p-8 border border-naji-taupe/10 rounded-xl hover:shadow-lg hover:border-naji-gold/30 transition duration-300 group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="droplets" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" data-i18n="feat_water_title">100% Waterproof</h3>
+                    <p class="text-naji-base/70 leading-relaxed" data-i18n="feat_water_desc">
+                        Engineered to withstand humidity and water exposure without swelling or warping. Perfect for bathrooms and kitchens.
+                    </p>
+                </div>
+                
+                <!-- Feature 2: Anti-Termite -->
+                <div class="p-8 border border-naji-taupe/10 rounded-xl hover:shadow-lg hover:border-naji-gold/30 transition duration-300 group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" data-i18n="feat_termite_title">Anti-Termite</h3>
+                    <p class="text-naji-base/70 leading-relaxed" data-i18n="feat_termite_desc">
+                        Our composite material is naturally resistant to termites and insects, ensuring the longevity of your investment.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Sound Insulation -->
+                <div class="p-8 border border-naji-taupe/10 rounded-xl hover:shadow-lg hover:border-naji-gold/30 transition duration-300 group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="volume-x" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" data-i18n="feat_sound_title">Sound Insulation</h3>
+                    <p class="text-naji-base/70 leading-relaxed" data-i18n="feat_sound_desc">
+                        Advanced honeycomb internal structure provides superior sound dampening for a peaceful home environment.
+                    </p>
+                </div>
+
+                <!-- Feature 4: Scratch Resistant -->
+                <div class="p-8 border border-naji-taupe/10 rounded-xl hover:shadow-lg hover:border-naji-gold/30 transition duration-300 group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="hammer" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" data-i18n="feat_scratch_title">Scratch Resistant</h3>
+                    <p class="text-naji-base/70 leading-relaxed" data-i18n="feat_scratch_desc">
+                        Durable surface that resists scratches and daily wear and tear, keeping your doors looking new.
+                    </p>
+                </div>
+
+                <!-- Feature 5: Eco-Friendly -->
+                <div class="p-8 border border-naji-taupe/10 rounded-xl hover:shadow-lg hover:border-naji-gold/30 transition duration-300 group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="leaf" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" data-i18n="feat_eco_title">Eco-Friendly</h3>
+                    <p class="text-naji-base/70 leading-relaxed" data-i18n="feat_eco_desc">
+                        Made from sustainable composite materials, free from harmful chemicals and fully recyclable.
+                    </p>
+                </div>
+
+                <!-- Feature 6: Anti-Bacterial -->
+                <div class="p-8 border border-naji-taupe/10 rounded-xl hover:shadow-lg hover:border-naji-gold/30 transition duration-300 group">
+                    <div class="w-16 h-16 bg-naji-sand rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-naji-gold transition-colors">
+                        <i data-lucide="shield-plus" class="w-8 h-8 text-naji-base"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3" data-i18n="feat_bacterial_title">Anti-Bacterial</h3>
+                    <p class="text-naji-base/70 leading-relaxed" data-i18n="feat_bacterial_desc">
+                        Hygienic surface properties that prevent the growth of bacteria and mold for a healthier home.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Catalog Section -->
+    <section id="download" class="py-24 bg-naji-base text-naji-bone relative overflow-hidden">
+        <!-- Abstract Decoration -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-naji-taupe/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Text Content -->
+                <div class="lg:w-1/2 text-center lg:text-left rtl:lg:text-right">
+                    <span class="text-naji-gold uppercase tracking-widest text-xs font-semibold mb-4 block" data-i18n="catalog_label">Technical Specifications</span>
+                    <h2 class="text-3xl md:text-5xl font-serif mb-6" data-i18n="catalog_title">Download the Full Experience</h2>
+                    <p class="text-naji-bone/70 mb-8 text-lg leading-relaxed" data-i18n="catalog_desc">
+                        Get the comprehensive guide featuring all 26 door models, 14 color swatches, and detailed technical cross-sections of our frame systems.
+                    </p>
+                    
+                    <div class="bg-white/5 border border-white/10 rounded-lg p-6 mb-8 backdrop-blur-sm">
+                        <!-- Updated list with 9 grid items, responsive layout -->
+                        <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4 text-sm text-naji-bone/80">
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_1">About Naji Doors</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_2">Vision, Mission & Message</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_3">WPC Door Technology</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_4">Exclusive Features</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_5">After-Sales Service</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_6">Door Models Gallery</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_7">Technical Profiles</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_8">Color Selection</span></li>
+                            <li class="flex items-center gap-3"><i data-lucide="check" class="text-naji-gold w-4 h-4 flex-shrink-0"></i> <span data-i18n="cat_item_9">Official Certificates</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="catalog.pdf" download class="inline-flex items-center justify-center gap-3 bg-naji-gold text-naji-base px-8 py-4 rounded hover:bg-white transition-all duration-300 font-medium w-full sm:w-auto">
+                            <i data-lucide="file-down"></i> <span data-i18n="btn_download_pdf">Download PDF Catalog</span>
+                        </a>
+                        <!-- New Policy Button -->
+                        <a href="policy.html" class="inline-flex items-center justify-center gap-3 border border-naji-bone text-naji-bone px-8 py-4 rounded hover:bg-naji-bone hover:text-naji-base transition-all duration-300 font-medium w-full sm:w-auto">
+                            <i data-lucide="file-text"></i> <span data-i18n="btn_policy">Return & Exchange Policy</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mockup Visual -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative bg-naji-taupe rounded-lg shadow-2xl p-2 transform rotate-2 hover:rotate-0 transition-transform duration-500 w-3/4 mx-auto">
+                        <!-- Placeholder for Catalog Cover -->
+                        <div class="bg-naji-bone h-[500px] w-full rounded flex items-center justify-center flex-col text-naji-base p-8 text-center border border-naji-base/10">
+                            <div class="w-20 h-20 border-4 border-naji-base rounded-t-full mb-6 mx-auto"></div>
+                            <h3 class="text-3xl font-serif font-bold">NAJI<br>DOORS</h3>
+                            <p class="mt-4 text-sm tracking-widest uppercase">Product Catalog 2024</p>
+                            <div class="mt-auto w-full border-t border-naji-base/20 pt-4 flex justify-between text-xs">
+                                <span>WPC Series</span>
+                                <span>Saudi Arabia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-24 bg-naji-bone">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-naji-gold uppercase tracking-widest text-xs font-semibold mb-2 block" data-i18n="reviews_subtitle">Trust & Quality</span>
+                <h2 class="text-3xl md:text-4xl font-serif text-naji-base mb-4" data-i18n="reviews_title">What Our Clients Say</h2>
+                <div class="w-16 h-1 bg-naji-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review Card 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-naji-taupe/10 relative fade-in-up">
+                    <div class="absolute -top-4 left-8 text-naji-gold opacity-20 text-6xl font-serif">"</div>
+                    <div class="flex text-naji-gold mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-naji-base/80 mb-6 italic leading-relaxed" data-i18n="review_1_text">
+                        The sound insulation is incredible. We live near a busy street and it made a huge difference. Highly recommended.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-naji-sand rounded-full flex items-center justify-center text-naji-base font-bold">A</div>
+                        <div>
+                            <h4 class="font-bold text-sm" data-i18n="review_1_author">Ahmed Al-Otaibi</h4>
+                            <p class="text-xs text-naji-taupe" data-i18n="review_role_homeowner">Homeowner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-naji-taupe/10 relative fade-in-up delay-100">
+                    <div class="absolute -top-4 left-8 text-naji-gold opacity-20 text-6xl font-serif">"</div>
+                    <div class="flex text-naji-gold mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-naji-base/80 mb-6 italic leading-relaxed" data-i18n="review_2_text">
+                        Professional team, clean installation, and the wood texture looks exactly like natural wood but better durability.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-naji-sand rounded-full flex items-center justify-center text-naji-base font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-sm" data-i18n="review_2_author">Sarah Al-Jasser</h4>
+                            <p class="text-xs text-naji-taupe" data-i18n="review_role_interior">Interior Designer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review Card 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-naji-taupe/10 relative fade-in-up delay-200">
+                    <div class="absolute -top-4 left-8 text-naji-gold opacity-20 text-6xl font-serif">"</div>
+                    <div class="flex text-naji-gold mb-4">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <p class="text-naji-base/80 mb-6 italic leading-relaxed" data-i18n="review_3_text">
+                        Best investment for our new home. The waterproof feature for bathrooms is a game changer.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-naji-sand rounded-full flex items-center justify-center text-naji-base font-bold">M</div>
+                        <div>
+                            <h4 class="font-bold text-sm" data-i18n="review_3_author">Mohammed Al-Harbi</h4>
+                            <p class="text-xs text-naji-taupe" data-i18n="review_role_contractor">Contractor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Restored White Background & Added Sections) -->
+    <footer id="contact" class="bg-naji-bone pt-20 pb-10 border-t border-naji-taupe/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Brand & Mission Section (New) -->
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in-up">
+                <div class="inline-flex items-center justify-center gap-3 mb-6">
+                    <img src="/assets/Naji-Logo.webp" alt="Naji Doors Logo" class="h-16 w-auto">
+                    <!-- Text Removed -->
+                    <!-- <div class="flex flex-col text-left rtl:text-right">
+                        <span class="font-serif text-2xl font-bold tracking-wider leading-none text-naji-base">NAJI</span>
+                        <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taNupe">Doors</span>
+                    </div> -->
+                </div>
+                <h3 class="text-2xl md:text-3xl font-serif text-naji-gold mb-4" data-i18n="footer_about_title">We Provide Safety for Homes</h3>
+                <p class="text-naji-base/80 text-lg leading-relaxed" data-i18n="footer_about_desc">
+                    Naji Doors Est. specializes in modern WPC doors. Luxury designs • High quality • Long-term reliability • Water and humidity resistant. We offer door solutions that suit your taste.
+                </p>
+            </div>
+
+            <!-- Columns Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 text-center md:text-start rtl:md:text-right border-t border-naji-taupe/10 pt-12">
+                
+                <!-- Column: Contact Us -->
+                <div>
+                    <h4 class="text-xl font-serif text-naji-gold mb-6" data-i18n="footer_contact_title">Contact Us</h4>
+                    <ul class="space-y-4 text-naji-base/80">
+                         <li>
+                            <a href="mailto:info@najidoors.sa" class="hover:text-naji-gold transition font-sans text-lg">info@najidoors.sa</a>
+                        </li>
+                        <li class="font-sans text-lg" dir="ltr">
+                             <a href="tel:+966554425152" class="hover:text-naji-gold transition">+966 55 442 5152</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column: Address -->
+                <div>
+                     <h4 class="text-xl font-serif text-naji-gold mb-6" data-i18n="footer_address_title">Address</h4>
+                     <p class="text-naji-base/80 text-lg" data-i18n="footer_address_text">Riyadh – Al Narjis District</p>
+                </div>
+
+                <!-- Column: Social Media -->
+                <div>
+                    <h4 class="text-xl font-serif text-naji-gold mb-6" data-i18n="footer_social_title">Social Media</h4>
+                    <ul class="space-y-4 text-naji-base/80 text-lg">
+                        <li><a href="#" class="hover:text-naji-gold transition" data-i18n="footer_tiktok">TikTok</a></li>
+                        <li><a href="#" class="hover:text-naji-gold transition" data-i18n="footer_instagram">Instagram</a></li>
+                        <li><a href="#" class="hover:text-naji-gold transition" data-i18n="footer_facebook">Facebook</a></li>
+                        <li><a href="https://wa.me/966554425152" class="hover:text-naji-gold transition" data-i18n="footer_whatsapp_direct">WhatsApp Direct</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            
+            <!-- Bottom Copyright & Credit -->
+            <div class="border-t border-naji-base/10 pt-8 flex flex-col md:flex-row justify-between items-center text-naji-base/60 text-sm gap-4">
+                <span>&copy; 2024 Naji Doors. All Rights Reserved. Made in KSA.</span>
+                <span class="font-medium flex items-center gap-1" data-i18n="footer_credit">Executed by Shootix Est.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed WhatsApp Button -->
+    <a href="https://wa.me/966554425152" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 z-50 flex items-center gap-2 group">
+        <i data-lucide="message-circle" class="w-6 h-6"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap text-sm font-bold">Chat with Us</span>
+    </a>
+
+    <!-- Application Logic -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // --- 1. Language Logic ---
+        const translations = {
+            en: {
+                nav_about: "ABOUT US",
+                nav_collection: "COLLECTION",
+                nav_features: "WHY WPC?",
+                nav_catalog: "CATALOG",
+                nav_contact: "CONTACT",
+                nav_policy: "POLICY",
+                nav_products: "PRODUCTS",
+                
+                hero_subtitle: "The Future of Entrances",
+                hero_title: "Elegant Durability.<br>Timeless Design.",
+                hero_desc: "Discover the perfect balance of nature and technology with our premium WPC doors. Engineered for the Saudi climate, designed for luxury.",
+                btn_explore: "Explore Collection",
+                btn_quote: "Get a Quote",
+                
+                about_label: "Who We Are",
+                about_title: "About Naji Doors",
+                about_desc: "Naji Doors offers integrated WPC doors that blend elegance, durability, and sustainability. With our deep experience and modern vision, we are committed to providing high-quality products carefully designed to meet our customers' aspirations for beauty, strength, and safety.",
+                
+                vision_title: "Our Vision",
+                vision_desc: "To be the leading and preferred choice for innovative WPC door solutions in the Saudi market, effectively contributing to the development of the construction sector and supporting sustainable development in line with the Kingdom's Vision 2030.",
+                
+                mission_title: "Our Mission",
+                mission_desc: "Manufacturing and supplying WPC doors that combine durability, beauty, and sustainability, meeting the needs and aspirations of our clients in the residential and commercial sectors in the Saudi market, using the latest technologies and best materials.",
+                
+                message_title: "Our Message",
+                message_desc: "At Naji Doors Est., we are committed to providing innovative and durable WPC doors that meet our clients' aspirations. We strive to combine high quality, diverse designs, and competitive prices, while building strong and sustainable relationships with our clients and partners.",
+
+                stat_years: "Years Experience",
+                stat_clients: "Happy Clients",
+                stat_projects: "Projects Executed",
+                stat_cities: "Cities Served",
+
+                // Services / Products Translations (NEW)
+                services_title: "Our Services / Products",
+                srv_1_title: "Interior WPC Doors",
+                srv_1_desc: "We provide a wide range of modern designs and colors to suit all tastes and decor styles.",
+                srv_2_title: "Professional Supply & Installation",
+                srv_2_desc: "We provide supply and installation service by specialized technicians, with precision in measurement and speed in execution.",
+                srv_3_title: "Solutions for Projects",
+                srv_3_desc: "We serve contractors and residential and commercial projects with reliable door solutions that meet quality and quantity requirements.",
+                srv_4_title: "Multiple Modern Designs",
+                srv_4_desc: "We offer a vast collection of modern designs and colors to match every taste and decor style.",
+
+                features_title: "Why Choose Naji WPC?",
+                feat_water_title: "100% Waterproof",
+                feat_water_desc: "Engineered to withstand humidity and water exposure without swelling or warping.",
+                feat_termite_title: "Anti-Termite",
+                feat_termite_desc: "Naturally resistant to termites and insects, ensuring the longevity of your investment.",
+                feat_sound_title: "Sound Insulation",
+                feat_sound_desc: "Advanced honeycomb internal structure provides superior sound dampening.",
+                feat_scratch_title: "Scratch Resistant",
+                feat_scratch_desc: "Durable surface that resists scratches and daily wear and tear, keeping your doors looking new.",
+                feat_eco_title: "Eco-Friendly",
+                feat_eco_desc: "Made from sustainable composite materials, free from harmful chemicals and fully recyclable.",
+                feat_bacterial_title: "Anti-Bacterial",
+                feat_bacterial_desc: "Hygienic surface properties that prevent the growth of bacteria and mold for a healthier home.",
+
+                collection_title: "The Collection",
+                collection_subtitle: "Explore our K-Series Designs",
+                view_full_catalog: "Browse All Products",
+                
+                catalog_label: "Technical Specifications",
+                catalog_title: "Download the Full Experience",
+                catalog_desc: "Get the comprehensive guide featuring all 26 door models, 14 color swatches, and detailed technical cross-sections of our frame systems.",
+                cat_item_1: "About Naji Doors",
+                cat_item_2: "Vision, Mission & Message",
+                cat_item_3: "WPC Door Technology",
+                cat_item_4: "Exclusive Features",
+                cat_item_5: "After-Sales Service",
+                cat_item_6: "Door Models Gallery",
+                cat_item_7: "Technical Profiles",
+                cat_item_8: "Color Selection",
+                cat_item_9: "Official Certificates",
+                
+                btn_download_pdf: "Download PDF Catalog",
+                btn_policy: "Return & Exchange Policy",
+                
+                reviews_subtitle: "Trust & Quality",
+                reviews_title: "What Our Clients Say",
+                review_1_text: "The sound insulation is incredible. We live near a busy street and it made a huge difference. Highly recommended.",
+                review_1_author: "Ahmed Al-Otaibi",
+                review_role_homeowner: "Homeowner",
+                review_2_text: "Professional team, clean installation, and the wood texture looks exactly like natural wood but better durability.",
+                review_2_author: "Sarah Al-Jasser",
+                review_role_interior: "Interior Designer",
+                review_3_text: "Best investment for our new home. The waterproof feature for bathrooms is a game changer.",
+                review_3_author: "Mohammed Al-Harbi",
+                review_role_contractor: "Contractor",
+                
+                footer_about_title: "We Provide Safety for Homes",
+                footer_about_desc: "Naji Doors Est. specializes in modern WPC doors. Luxury designs • High quality • Long-term reliability • Water and humidity resistant. We offer door solutions that suit your taste.",
+                footer_contact_title: "Contact Us",
+                footer_address_title: "Address",
+                footer_address_text: "Riyadh – Al Narjis District",
+                footer_social_title: "Social Media",
+                footer_tiktok: "TikTok",
+                footer_instagram: "Instagram",
+                footer_facebook: "Facebook",
+                footer_whatsapp_direct: "WhatsApp Direct",
+                footer_credit: "Executed by Shootix Est."
+            },
+            ar: {
+                nav_about: "من نحن",
+                nav_collection: "التشكيلة",
+                nav_features: "لماذا WPC؟",
+                nav_catalog: "الكتالوج",
+                nav_contact: "تواصل معنا",
+                nav_policy: "السياسة",
+                nav_products: "المنتجات",
+                
+                hero_subtitle: "مستقبل المداخل",
+                hero_title: "متانة أنيقة.<br>تصميم خالد.",
+                hero_desc: "اكتشف التوازن المثالي بين الطبيعة والتكنولوجيا مع أبواب WPC الفاخرة. صممت لتناسب المناخ السعودي ولتعكس الفخامة.",
+                btn_explore: "استكشف التشكيلة",
+                btn_quote: "اطلب عرض سعر",
+
+                about_label: "من نحن",
+                about_title: "عن ناجي دورز",
+                about_desc: "يقدم ناجي دورز ابواب wpc متكاملة ، تمزج بين الأناقه والمتانة والاستدامة بخبرتنا العميقة ورؤيتنا الحديثة ، نلتزم بتوفير منتجات فائقة الجودة مصممه بعناية لتلبي تتطلعات عملائنا نحو الجمال والقوة والأمان",
+                
+                vision_title: "رؤية \"ناجي\"",
+                vision_desc: "أن نكون الخيار الرائد والمفضل لحلول أبواب WPC المبتكرة وعالية الجودة في السوق السعودي، مساهمين بفاعلية في تطوير قطاع البناء والتشطيب ودعم التنمية المستدامة وفق رؤية المملكة 2030.",
+                
+                mission_title: "مهمة \"ناجي\"",
+                mission_desc: "تصنيع وتوريد أبواب WPC تجمع بين المتانة والجمال والاستدامة، وتلبي احتياجات وتطلعات عملائنا في القطاعات السكنية والتجارية بالسوق السعودي، وذلك باستخدام أحدث التقنيات وأفضل المواد.",
+                
+                message_title: "رسالة \"ناجي\"",
+                message_desc: "في مؤسسة ناجي للأبواب، نلتزم بتقديم أبواب WPC مبتكرة ومتينة تلبي تطلعات عملائنا. نحرص على الجمع بين الجودة العالية والتصاميم المتنوعة والأسعار التنافسية، مع بناء علاقات قوية ومستدامة مع عملائنا وشركائنا.",
+
+                stat_years: "سنوات خبرة",
+                stat_clients: "عملاء سعداء",
+                stat_projects: "مشاريع منفذة",
+                stat_cities: "مدن نخدمها",
+
+                // Services / Products Translations AR (NEW)
+                services_title: "خدماتنا / منتجاتنا",
+                srv_1_title: "أبواب WPC داخلية",
+                srv_1_desc: "نوفر تشكيلة واسعة من التصاميم والألوان الحديثة لتناسب جميع الأذواق وأنماط الديكور.",
+                srv_2_title: "توريد وتركيب احترافي",
+                srv_2_desc: "نوفر خدمة توريد وتركيب بأيدي فنيين متخصصين، مع دقة في القياس وسرعة في التنفيذ.",
+                srv_3_title: "حلول للمشاريع",
+                srv_3_desc: "نخدم المقاولين والمشاريع السكنية والتجارية بحلول أبواب موثوقة تلبي متطلبات الجودة والكمية.",
+                srv_4_title: "تصاميم عصرية متعددة",
+                srv_4_desc: "نوفر تشكيلة واسعة من التصاميم والألوان الحديثة لتناسب جميع الأذواق وأنماط الديكور.",
+
+                features_title: "لماذا تختار أبواب ناجي؟",
+                feat_water_title: "مقاومة للماء ١٠٠٪",
+                feat_water_desc: "صممت لتتحمل الرطوبة والتعرض للماء دون انتفاخ أو تقوس. مثالية للحمامات والمطابخ.",
+                feat_termite_title: "ضد النمل الأبيض",
+                feat_termite_desc: "مادة مركبة مقاومة طبيعياً للنمل والحشرات، مما يضمن طول عمر استثمارك.",
+                feat_sound_title: "عزل صوتي",
+                feat_sound_desc: "هيكل داخلي متطور بتصميم قرص العسل يوفر عزلاً صوتياً فائقاً لبيئة هادئة.",
+                feat_scratch_title: "مقاوم للخدش",
+                feat_scratch_desc: "سطح متين يقاوم الخدوش والتآكل اليومي، مما يحافظ على مظهر أبوابك كالجديدة.",
+                feat_eco_title: "صديق للبيئة",
+                feat_eco_desc: "مصنوع من مواد مركبة مستدامة، خالية من المواد الكيميائية الضارة وقابلة لإعادة التدوير بالكامل.",
+                feat_bacterial_title: "ضد البكتيريا",
+                feat_bacterial_desc: "خصائص سطح صحية تمنع نمو البكتيريا والعفن لبيئة منزلية أكثر صحة وأماناً.",
+
+                collection_title: "التشكيلة",
+                collection_subtitle: "استكشف تصاميم سلسلة K",
+                view_full_catalog: "تصفح جميع المنتجات",
+                
+                catalog_label: "المواصفات الفنية",
+                catalog_title: "حمل التجربة الكاملة",
+                catalog_desc: "احصل على الدليل الشامل الذي يضم جميع موديلات الأبواب، خيارات الألوان الـ ١٤، والرسومات الفنية للقطاعات.",
+                cat_item_1: "عن ناجي",
+                cat_item_2: "رسالة ورؤية ومهمة ناجي",
+                cat_item_3: "أبواب ناجي WPC",
+                cat_item_4: "مميزات أبواب ناجي",
+                cat_item_5: "خدمة ما بعد البيع",
+                cat_item_6: "نماذج أبواب ناجي",
+                cat_item_7: "قطاعات الأبواب",
+                cat_item_8: "نماذج ألوان الأبواب",
+                cat_item_9: "الأوراق الرسمية",
+
+                btn_download_pdf: "تحميل الكتالوج PDF",
+                btn_policy: "سياسة الاستبدال والاسترجاع",
+
+                reviews_subtitle: "ثقة وجودة",
+                reviews_title: "ماذا يقول عملاؤنا",
+                review_1_text: "العزل الصوتي مذهل. نسكن بالقرب من شارع مزدحم وقد أحدثت الأبواب فرقاً هائلاً. أنصح بها بشدة.",
+                review_1_author: "أحمد العتيبي",
+                review_role_homeowner: "مالك منزل",
+                review_2_text: "فريق محترف، تركيب نظيف، وملمس الخشب يبدو تماماً كالخشب الطبيعي ولكنه أكثر متانة.",
+                review_2_author: "سارة الجاسر",
+                review_role_interior: "مصممة داخلية",
+                review_3_text: "أفضل استثمار لمنزلنا الجديد. خاصية مقاومة الماء لأبواب دورات المياه ميزة رائعة وتستحق الاقتناء.",
+                review_3_author: "محمد الحربي",
+                review_role_contractor: "مقاول",
+                
+                footer_about_title: "نحن نوفر الأمان للمنازل",
+                footer_about_desc: "مؤسسة ناجي دورز | Naji Doors متخصصون في أبواب WPC العصرية. تصاميم فاخرة • جودة عالية • اعتماد طويل الأمد • مقاومة للماء والرطوبة. نقدم حلول أبواب تليق بذوقك.",
+                footer_contact_title: "تواصل معنا",
+                footer_address_title: "العنوان",
+                footer_address_text: "الرياض – حي النرجس",
+                footer_social_title: "وسائل التواصل الاجتماعي",
+                footer_tiktok: "تيك توك",
+                footer_instagram: "إنستغرام",
+                footer_facebook: "فيسبوك",
+                footer_whatsapp_direct: "واتساب مباشرة",
+                footer_credit: "تنفيذ مؤسسة Shootix"
+            }
+        };
+
+        const langToggleBtn = document.getElementById('langToggle');
+        const currentLangSpan = document.getElementById('currentLang');
+        const mobileLangToggleBtn = document.getElementById('mobileLangToggle');
+        const mobileLangLabel = document.getElementById('mobileLangLabel');
+        let currentLanguage = 'en';
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = lang;
+            currentLangSpan.textContent = lang === 'ar' ? 'EN' : 'AR';
+            
+            if(mobileLangLabel) {
+               mobileLangLabel.textContent = lang === 'ar' ? 'English' : 'العربية';
+            }
+
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        langToggleBtn.addEventListener('click', () => {
+            const newLang = currentLanguage === 'en' ? 'ar' : 'en';
+            setLanguage(newLang);
+        });
+
+        if(mobileLangToggleBtn){
+            mobileLangToggleBtn.addEventListener('click', () => {
+                const newLang = currentLanguage === 'en' ? 'ar' : 'en';
+                setLanguage(newLang);
+                document.getElementById('mobileMenu').classList.add('hidden');
+            });
+        }
+
+        // --- Navbar Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('h-20', 'h-16');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('h-16', 'h-20');
+            }
+        });
+
+        // --- Mobile Menu ---
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Init with Arabic
+        setLanguage('ar');
+
+    </script>
+</body>
+</html>
