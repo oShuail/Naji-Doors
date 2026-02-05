@@ -36,7 +36,7 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     backgroundImage: {
-                        'hero-pattern': "linear-gradient(to right bottom, rgba(44, 36, 27, 0.8), rgba(44, 36, 27, 0.6)), url('/assets/background-image-landingPage.jpg')",
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(44, 36, 27, 0.8), rgba(44, 36, 27, 0.6)), url('assets/background-image-landingPage.jpg')",
                     }
                 }
             }
@@ -95,7 +95,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <a href="index.html" class="flex items-center gap-3">
-                        <img src="/assets/Naji-Door-logo.png" alt="Naji Doors Logo" class="h-12 w-auto">
+                        <img src="assets/Naji-Door-logo.png" alt="Naji Doors Logo" class="h-12 w-auto">
                         <div class="flex flex-col">
                             <span class="font-serif text-xl font-bold tracking-wider leading-none">NAJI</span>
                             <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taupe">Doors</span>
@@ -253,11 +253,10 @@
     <!-- Collection Section (Highlights Only) -->
     <section id="collection" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-                <div>
-                    <h2 class="text-4xl font-serif text-naji-base mb-2" data-i18n="collection_title">The Collection</h2>
-                    <p class="text-naji-taupe" data-i18n="collection_subtitle">Explore our K-Series Designs</p>
-                </div>
+            <!-- UPDATED HEADER: Centered Layout -->
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-serif text-naji-base mb-2" data-i18n="collection_title">The Products</h2>
+                <p class="text-naji-taupe" data-i18n="collection_subtitle">Explore our K-Series Designs</p>
             </div>
 
             <!-- Gallery Grid (Highlights) -->
@@ -265,7 +264,7 @@
                 <!-- Product 1 -->
                 <div class="door-card group cursor-pointer" data-category="modern">
                     <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
-                        <img src="/assets/roomImage2.jpg" alt="Door K-01" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <img src="assets/roomImage2.jpg" alt="Door K-01" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
                         <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                             <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
@@ -277,7 +276,7 @@
                  <!-- Product 2 -->
                  <div class="door-card group cursor-pointer" data-category="classic">
                     <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
-                        <img src="/assets/roomImage3.jpg" alt="Door K-02" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <img src="assets/roomImage3.jpg" alt="Door K-02" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
                         <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                             <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
@@ -289,7 +288,7 @@
                  <!-- Product 3 -->
                  <div class="door-card group cursor-pointer" data-category="modern">
                     <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
-                        <img src="/assets/roomImage1.jpg" alt="Door K-03" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <img src="assets/roomImage1.jpg" alt="Door K-03" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
                         <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
                         <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                             <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
@@ -300,9 +299,9 @@
             </div>
             
             <div class="mt-16 text-center">
-                <!-- UPDATED LINK -->
-                <a href="products.html" class="inline-flex items-center gap-2 text-naji-base border-b border-naji-gold pb-1 hover:text-naji-taupe transition-colors" data-i18n="view_full_catalog">
-                    Browse All Products <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <!-- UPDATED LINK STYLE -->
+                <a href="products.html" class="inline-flex items-center gap-2 text-xl font-bold text-naji-base border-b-2 border-naji-gold pb-1 hover:text-naji-taupe transition-colors" data-i18n="view_full_catalog">
+                    Browse All Products <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
             </div>
         </div>
@@ -509,7 +508,7 @@
             <!-- Brand & Mission Section (New) -->
             <div class="text-center max-w-4xl mx-auto mb-16 fade-in-up">
                 <div class="inline-flex items-center justify-center gap-3 mb-6">
-                    <img src="/assets/Naji-Door-logo.png" alt="Naji Doors Logo" class="h-16 w-auto">
+                    <img src="assets/Naji-Door-logo.png" alt="Naji Doors Logo" class="h-16 w-auto">
                     <div class="flex flex-col text-left rtl:text-right">
                         <span class="font-serif text-2xl font-bold tracking-wider leading-none text-naji-base">NAJI</span>
                         <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taupe">Doors</span>
@@ -671,7 +670,7 @@
                 footer_about_desc: "Naji Doors Est. specializes in modern WPC doors. Luxury designs • High quality • Long-term reliability • Water and humidity resistant. We offer door solutions that suit your taste.",
                 footer_contact_title: "Contact Us",
                 footer_address_title: "Address",
-                footer_address_text: "Riyadh – Al Narjis District",
+                footer_address_text: "Riyadh, Central Region.",
                 footer_social_title: "Social Media",
                 footer_tiktok: "TikTok",
                 footer_instagram: "Instagram",
@@ -773,7 +772,7 @@
                 footer_about_desc: "مؤسسة ناجي دورز | Naji Doors متخصصون في أبواب WPC العصرية. تصاميم فاخرة • جودة عالية • اعتماد طويل الأمد • مقاومة للماء والرطوبة. نقدم حلول أبواب تليق بذوقك.",
                 footer_contact_title: "تواصل معنا",
                 footer_address_title: "العنوان",
-                footer_address_text: "الرياض – حي النرجس",
+                footer_address_text: "الرياض، المنطقة الوسطى.",
                 footer_social_title: "وسائل التواصل الاجتماعي",
                 footer_tiktok: "تيك توك",
                 footer_instagram: "إنستغرام",
