@@ -36,7 +36,7 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     backgroundImage: {
-                        'hero-pattern': "linear-gradient(to right bottom, rgba(44, 36, 27, 0.8), rgba(44, 36, 27, 0.6)), url('https://images.unsplash.com/photo-1513519245088-0e12902e5a38?q=80&w=2070&auto=format&fit=crop')",
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(44, 36, 27, 0.8), rgba(44, 36, 27, 0.6)), url('/assets/background-image-landingPage.jpg')",
                     }
                 }
             }
@@ -95,19 +95,17 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <a href="index.html" class="flex items-center gap-3">
-                        <img src="/assets/Naji-Logo.webp" alt="Naji Doors Logo" class="h-12 w-auto">
-                        <!-- Text Removed to rely on image logo or keep if preferred, keeping text for SEO but image is main visual -->
-                        <!-- <div class="flex flex-col">
+                        <img src="/assets/Naji-Door-logo.png" alt="Naji Doors Logo" class="h-12 w-auto">
+                        <div class="flex flex-col">
                             <span class="font-serif text-xl font-bold tracking-wider leading-none">NAJI</span>
                             <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taupe">Doors</span>
-                        </div> -->
+                        </div>
                     </a>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
                     <a href="#about" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_about">ABOUT US</a>
-                    <a href="products.html" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_products">PRODUCTS</a>
                     <a href="#collection" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_collection">COLLECTION</a>
                     <a href="#features" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_features">WHY WPC?</a>
                     <a href="#download" class="text-naji-base hover:text-naji-gold transition-colors text-sm font-medium tracking-wide" data-i18n="nav_catalog">CATALOG</a>
@@ -134,7 +132,6 @@
         <div id="mobileMenu" class="hidden md:hidden bg-naji-bone border-t border-naji-taupe/20">
             <div class="px-4 pt-2 pb-6 space-y-2">
                 <a href="#about" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_about">About Us</a>
-                <a href="products.html" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_products">Products</a>
                 <a href="#collection" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_collection">Collection</a>
                 <a href="#features" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_features">Why WPC?</a>
                 <a href="#download" class="block px-3 py-2 text-naji-base font-medium" data-i18n="nav_catalog">Catalog</a>
@@ -253,7 +250,65 @@
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Collection Section (Highlights Only) -->
+    <section id="collection" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-4xl font-serif text-naji-base mb-2" data-i18n="collection_title">The Collection</h2>
+                    <p class="text-naji-taupe" data-i18n="collection_subtitle">Explore our K-Series Designs</p>
+                </div>
+            </div>
+
+            <!-- Gallery Grid (Highlights) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="galleryGrid">
+                <!-- Product 1 -->
+                <div class="door-card group cursor-pointer" data-category="modern">
+                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+                        <img src="/assets/roomImage2.jpg" alt="Door K-01" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
+                            <h3 class="text-2xl font-serif">Model K-02</h3>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 2 -->
+                 <div class="door-card group cursor-pointer" data-category="classic">
+                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+                        <img src="/assets/roomImage3.jpg" alt="Door K-02" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
+                            <h3 class="text-2xl font-serif">Model K-19</h3>
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- Product 3 -->
+                 <div class="door-card group cursor-pointer" data-category="modern">
+                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
+                        <img src="/assets/roomImage1.jpg" alt="Door K-03" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
+                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
+                            <h3 class="text-2xl font-serif">Model K-08</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <!-- UPDATED LINK -->
+                <a href="products.html" class="inline-flex items-center gap-2 text-naji-base border-b border-naji-gold pb-1 hover:text-naji-taupe transition-colors" data-i18n="view_full_catalog">
+                    Browse All Products <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (NEW) -->
     <section id="services" class="py-24 bg-naji-bone/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in-up">
@@ -305,64 +360,6 @@
                         We offer a vast collection of modern designs and colors to match every taste and decor style.
                     </p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Collection Section (Highlights Only) -->
-    <section id="collection" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-                <div>
-                    <h2 class="text-4xl font-serif text-naji-base mb-2" data-i18n="collection_title">The Collection</h2>
-                    <p class="text-naji-taupe" data-i18n="collection_subtitle">Explore our K-Series Designs</p>
-                </div>
-            </div>
-
-            <!-- Gallery Grid (Highlights) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="galleryGrid">
-                <!-- Product 1 -->
-                <div class="door-card group cursor-pointer" data-category="modern">
-                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1517414909192-38d64478170c?q=80&w=1956&auto=format&fit=crop" alt="Door K-01" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
-                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
-                            <h3 class="text-2xl font-serif">Model K-01</h3>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Product 2 -->
-                 <div class="door-card group cursor-pointer" data-category="classic">
-                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1595846519845-68e298c2edd8?q=80&w=1974&auto=format&fit=crop" alt="Door K-02" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
-                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
-                            <h3 class="text-2xl font-serif">Model K-05</h3>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Product 3 -->
-                 <div class="door-card group cursor-pointer" data-category="modern">
-                    <div class="relative h-96 overflow-hidden rounded-lg bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1509644851169-2acc08aa25b5?q=80&w=1996&auto=format&fit=crop" alt="Door K-03" class="door-img w-full h-full object-cover transition-transform duration-700 ease-in-out">
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors"></div>
-                        <div class="absolute bottom-6 left-6 text-white opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-                            <p class="text-xs uppercase tracking-widest mb-1">K-Series</p>
-                            <h3 class="text-2xl font-serif">Model K-09</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-16 text-center">
-                <!-- UPDATED LINK -->
-                <a href="products.html" class="inline-flex items-center gap-2 text-naji-base border-b border-naji-gold pb-1 hover:text-naji-taupe transition-colors" data-i18n="view_full_catalog">
-                    Browse All Products <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
             </div>
         </div>
     </section>
@@ -476,7 +473,7 @@
                     </div>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="catalog.pdf" download class="inline-flex items-center justify-center gap-3 bg-naji-gold text-naji-base px-8 py-4 rounded hover:bg-white transition-all duration-300 font-medium w-full sm:w-auto">
+                        <a href="/downloads/Naji-Catalog.pdf" download class="inline-flex items-center justify-center gap-3 bg-naji-gold text-naji-base px-8 py-4 rounded hover:bg-white transition-all duration-300 font-medium w-full sm:w-auto">
                             <i data-lucide="file-down"></i> <span data-i18n="btn_download_pdf">Download PDF Catalog</span>
                         </a>
                         <!-- New Policy Button -->
@@ -493,90 +490,11 @@
                         <div class="bg-naji-bone h-[500px] w-full rounded flex items-center justify-center flex-col text-naji-base p-8 text-center border border-naji-base/10">
                             <div class="w-20 h-20 border-4 border-naji-base rounded-t-full mb-6 mx-auto"></div>
                             <h3 class="text-3xl font-serif font-bold">NAJI<br>DOORS</h3>
-                            <p class="mt-4 text-sm tracking-widest uppercase">Product Catalog 2024</p>
+                            <p class="mt-4 text-sm tracking-widest uppercase">Product Catalog 2026</p>
                             <div class="mt-auto w-full border-t border-naji-base/20 pt-4 flex justify-between text-xs">
                                 <span>WPC Series</span>
                                 <span>Saudi Arabia</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Reviews Section -->
-    <section id="reviews" class="py-24 bg-naji-bone">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <span class="text-naji-gold uppercase tracking-widest text-xs font-semibold mb-2 block" data-i18n="reviews_subtitle">Trust & Quality</span>
-                <h2 class="text-3xl md:text-4xl font-serif text-naji-base mb-4" data-i18n="reviews_title">What Our Clients Say</h2>
-                <div class="w-16 h-1 bg-naji-gold mx-auto"></div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Review Card 1 -->
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-naji-taupe/10 relative fade-in-up">
-                    <div class="absolute -top-4 left-8 text-naji-gold opacity-20 text-6xl font-serif">"</div>
-                    <div class="flex text-naji-gold mb-4">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    </div>
-                    <p class="text-naji-base/80 mb-6 italic leading-relaxed" data-i18n="review_1_text">
-                        The sound insulation is incredible. We live near a busy street and it made a huge difference. Highly recommended.
-                    </p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-naji-sand rounded-full flex items-center justify-center text-naji-base font-bold">A</div>
-                        <div>
-                            <h4 class="font-bold text-sm" data-i18n="review_1_author">Ahmed Al-Otaibi</h4>
-                            <p class="text-xs text-naji-taupe" data-i18n="review_role_homeowner">Homeowner</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review Card 2 -->
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-naji-taupe/10 relative fade-in-up delay-100">
-                    <div class="absolute -top-4 left-8 text-naji-gold opacity-20 text-6xl font-serif">"</div>
-                    <div class="flex text-naji-gold mb-4">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    </div>
-                    <p class="text-naji-base/80 mb-6 italic leading-relaxed" data-i18n="review_2_text">
-                        Professional team, clean installation, and the wood texture looks exactly like natural wood but better durability.
-                    </p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-naji-sand rounded-full flex items-center justify-center text-naji-base font-bold">S</div>
-                        <div>
-                            <h4 class="font-bold text-sm" data-i18n="review_2_author">Sarah Al-Jasser</h4>
-                            <p class="text-xs text-naji-taupe" data-i18n="review_role_interior">Interior Designer</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Review Card 3 -->
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-naji-taupe/10 relative fade-in-up delay-200">
-                    <div class="absolute -top-4 left-8 text-naji-gold opacity-20 text-6xl font-serif">"</div>
-                    <div class="flex text-naji-gold mb-4">
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
-                    </div>
-                    <p class="text-naji-base/80 mb-6 italic leading-relaxed" data-i18n="review_3_text">
-                        Best investment for our new home. The waterproof feature for bathrooms is a game changer.
-                    </p>
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-naji-sand rounded-full flex items-center justify-center text-naji-base font-bold">M</div>
-                        <div>
-                            <h4 class="font-bold text-sm" data-i18n="review_3_author">Mohammed Al-Harbi</h4>
-                            <p class="text-xs text-naji-taupe" data-i18n="review_role_contractor">Contractor</p>
                         </div>
                     </div>
                 </div>
@@ -591,12 +509,11 @@
             <!-- Brand & Mission Section (New) -->
             <div class="text-center max-w-4xl mx-auto mb-16 fade-in-up">
                 <div class="inline-flex items-center justify-center gap-3 mb-6">
-                    <img src="/assets/Naji-Logo.webp" alt="Naji Doors Logo" class="h-16 w-auto">
-                    <!-- Text Removed -->
-                    <!-- <div class="flex flex-col text-left rtl:text-right">
+                    <img src="/assets/Naji-Door-logo.png" alt="Naji Doors Logo" class="h-16 w-auto">
+                    <div class="flex flex-col text-left rtl:text-right">
                         <span class="font-serif text-2xl font-bold tracking-wider leading-none text-naji-base">NAJI</span>
-                        <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taNupe">Doors</span>
-                    </div> -->
+                        <span class="text-[0.6rem] uppercase tracking-[0.2em] text-naji-taupe">Doors</span>
+                    </div>
                 </div>
                 <h3 class="text-2xl md:text-3xl font-serif text-naji-gold mb-4" data-i18n="footer_about_title">We Provide Safety for Homes</h3>
                 <p class="text-naji-base/80 text-lg leading-relaxed" data-i18n="footer_about_desc">
@@ -641,7 +558,7 @@
             
             <!-- Bottom Copyright & Credit -->
             <div class="border-t border-naji-base/10 pt-8 flex flex-col md:flex-row justify-between items-center text-naji-base/60 text-sm gap-4">
-                <span>&copy; 2024 Naji Doors. All Rights Reserved. Made in KSA.</span>
+                <span>&copy; 2026 Naji Doors. All Rights Reserved. Made in KSA.</span>
                 <span class="font-medium flex items-center gap-1" data-i18n="footer_credit">Executed by Shootix Est.</span>
             </div>
         </div>
@@ -661,13 +578,13 @@
         // --- 1. Language Logic ---
         const translations = {
             en: {
-                nav_about: "ABOUT US",
-                nav_collection: "COLLECTION",
-                nav_features: "WHY WPC?",
-                nav_catalog: "CATALOG",
-                nav_contact: "CONTACT",
-                nav_policy: "POLICY",
-                nav_products: "PRODUCTS",
+                nav_about: "About us",
+                nav_collection: "Collection",
+                nav_features: "Why WPC?",
+                nav_catalog: "Catalog",
+                nav_contact: "Contact",
+                nav_policy: "Policy",
+                nav_products: "Products",
                 
                 hero_subtitle: "The Future of Entrances",
                 hero_title: "Elegant Durability.<br>Timeless Design.",
@@ -764,7 +681,7 @@
             },
             ar: {
                 nav_about: "من نحن",
-                nav_collection: "التشكيلة",
+                nav_collection: "المنتجات",
                 nav_features: "لماذا WPC؟",
                 nav_catalog: "الكتالوج",
                 nav_contact: "تواصل معنا",
@@ -774,7 +691,7 @@
                 hero_subtitle: "مستقبل المداخل",
                 hero_title: "متانة أنيقة.<br>تصميم خالد.",
                 hero_desc: "اكتشف التوازن المثالي بين الطبيعة والتكنولوجيا مع أبواب WPC الفاخرة. صممت لتناسب المناخ السعودي ولتعكس الفخامة.",
-                btn_explore: "استكشف التشكيلة",
+                btn_explore: "استكشف المنتجات",
                 btn_quote: "اطلب عرض سعر",
 
                 about_label: "من نحن",
@@ -820,7 +737,7 @@
                 feat_bacterial_title: "ضد البكتيريا",
                 feat_bacterial_desc: "خصائص سطح صحية تمنع نمو البكتيريا والعفن لبيئة منزلية أكثر صحة وأماناً.",
 
-                collection_title: "التشكيلة",
+                collection_title: "المنتجات",
                 collection_subtitle: "استكشف تصاميم سلسلة K",
                 view_full_catalog: "تصفح جميع المنتجات",
                 
